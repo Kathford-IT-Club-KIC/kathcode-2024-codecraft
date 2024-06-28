@@ -20,13 +20,43 @@ async
 {
   final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
   if(pickedFile != null){
-    getState(()
-    {
+    getState(() {
       images.add(pickedFile);
-      if(images.add(pickedFile>=3){
-        showError=false;
-      });
-    })
+      if (images.length >= 3) {
+        showError = false;
+      }
+    });
   }
 }
+  void _navigateToNextPage(BuildContext context) {
+    if (images.length < 3) {
+      setState(() {
+        showError = true;
+      });
+    } else {
+      widget.propertyInfo.images = images;
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => AddPropertyStep4(propertyInfo: widget.propertyInfo),
+        ),
+      );
+    }
+  }
+@ocerride
+    Widget build(BuildContext context){
+    return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: ()
+          {
+            Navigator.pop(context);
+          },
+        ),
+        title: Text('Add Property'),
+      ),
+
+    )
+    }
 }
