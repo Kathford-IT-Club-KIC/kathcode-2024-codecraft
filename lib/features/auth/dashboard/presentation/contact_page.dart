@@ -40,9 +40,28 @@ class ContactUsPage extends StatelessWidget {
             Row(
               children: [
                 Icon(Icons.phone, color: Colors.blue),
-
-              ]
-            )
+                SizedBox(width: 8),
+                Expanded(
+                  child: Text(
+                    '+1 234 567 890'
+                        style: TextStyle(fontSize: 16),
+                  ), //text
+                ), //expanded
+              ],
+            ), //Row
+            SizedBox(height: 16),
+            Row(
+            children: [
+              Icon(Icons.email, color: Colors.blue),
+              SizedBox(width: 8),
+              Expanded:
+             child: [
+               'contact@easyghar.com'
+    ]
+    )
+    )
+    ]
+    )
           ]
         )
       )
