@@ -100,6 +100,19 @@ try{
         contactNumber,
         amentities,
     });
+
+    //Validate the property before saving
+    try{
+        await newProperty.validate();
+    } catch (validationError) {
+        console.error(
+            "Validation Error: Property validation failed",
+            validationError,
+        );
+        return next(
+            new ApiError(400, `Validation error: $(validationError.message)`),
+        );
+    }
 }
 
 );
