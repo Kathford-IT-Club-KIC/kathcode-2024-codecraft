@@ -33,4 +33,23 @@ const searchProperty = asyncHandler(async (req, res, next) => {
             .json(new ApiResponse(404, "No properties found matching your query"));
         }
 
-        
+        // Respond with the found properties
+        return res
+        .status(200)
+        .json(new ApiResponse(200, "Properties found", properties));
+    } catch (error) {
+        // Log the error for debugging purposes
+        console.error("Error finding properties:", error);
+
+        // Respond with a 500 status code and the error message
+        return res
+        .status(500)
+        .json(
+            new ApiResponse(500, "Error finding properties",{
+                error: error.message,
+        }),
+        );
+    }
+});
+
+export { searchProperty };
