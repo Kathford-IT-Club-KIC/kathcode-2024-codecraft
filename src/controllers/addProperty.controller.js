@@ -53,4 +53,25 @@ if (!title || !description || !address || !amount || !categories){
     return next(new ApiError(400, "All fields are required"));
 }
 
+// Ensure latitude and longitude are within valid ranges
+let validLatitude = parseFloat(latitude);
+let validLongitude = parseFloat(longitude);
+if(
+    validLatitude < -90 || 
+     validLatitude > 90 || 
+     validLongitude < -180 || 
+     validLongitude > 180
+) {
+    if (
+        validLatitude >= -180 &&
+        validLatitude <= 180 &&
+        validLongitude >= -90 &&
+        validLongitude <= 90
+    ) {
+        [validLatitude, validLongitude] = [validLongitude, validLatitude];
+    } else{
+        return next(new ApiError(400, "Invalid latitude or longitude values"));
+    }
+}
+
 );
