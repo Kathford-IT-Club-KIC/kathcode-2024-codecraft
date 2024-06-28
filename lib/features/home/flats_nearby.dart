@@ -12,7 +12,7 @@ class FlatsNearBy extends StatelessWidget {
 
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-          child: Ctext("Flats Nearby", type: TextType.displayLarge,
+          child: CText("Flats Nearby", type: TextType.displayLarge,
             color: AppColors.darkBlue,
           ),
         ),
