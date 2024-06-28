@@ -1,6 +1,6 @@
-import { asyncHandler } from "../utils/asyncHandler.ja";
+import { asyncHandler } from "../utils/asyncHandler.js";
 import { User } from "../models/user.models.js";
-import { ApiError } from "../utils/apiError.js";
+import { apiError } from "../utils/apiError.js";
 import { ApiResponse } from "../utils/apiResponse.js";
 const updateProfile = asyncHandler(async (req, res) => {
   try {
@@ -12,19 +12,19 @@ const updateProfile = asyncHandler(async (req, res) => {
         (field) => field?.trim() === ""
       )
     ) {
-      throw new ApiError(400, "All fields are required");
+      throw new apiError(400, "All fields are required");
     }
 
     //validate if user exist or not
     const user = await User.findById(id);
     if (!user) {
-      throw new ApiError(409, "User not found");
+      throw new apiError(409, "User not found");
     }
 
     //check if email is available
     const takenEmail = await User.findOne({ email, _id: { $ne: id } });
     if (takenEmail) {
-      throw new ApiError(409, "Email is already taken");
+      throw new apiError(409, "Email is already taken");
     }
 
     //update the information

@@ -1,6 +1,6 @@
 import { User } from "../models/user.models.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
-import { ApiError } from "../utils/apiError.js";
+import { apiError } from "../utils/apiError.js";
 import { ApiResponse } from "../utils/apiResponse.js";
 
 const changePassword = asyncHandler(async (req, res) => {
@@ -8,7 +8,7 @@ const changePassword = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user?._id);
 
   if (!user) {
-    throw new ApiError(409, "Invalid word password");
+    throw new apiError(409, "Invalid word password");
   }
   user.password = newPassword;
   await user.save({ validateBeforeSave: false });

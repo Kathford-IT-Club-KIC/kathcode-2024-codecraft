@@ -1,6 +1,6 @@
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { User } from "../models/user.models.js";
-import { ApiError } from "../utils/apiError.js";
+import { apiError } from "../utils/apiError.js";
 import { ApiResponse } from "../utils/apiResponse.js";
 import bcrypt from "bcryptjs";
 const loginUser = asyncHandler(async (req, res) => {
@@ -14,13 +14,13 @@ const loginUser = asyncHandler(async (req, res) => {
     // Check if user exists
     const user = await User.findOne({ email });
     if (!user) {
-      throw new ApiError(401, "Invalid email or password");
+      throw new apiError(401, "Invalid email or password");
     }
 
     //check password
     const isMatch = await bcrypt.compare(password, User.password);
     if (!isMatch) {
-      throw new ApiError(401, "Invalid email or password");
+      throw new apiError(401, "Invalid email or password");
     }
     //response the success message
     return res.status(201).json(new ApiResponse(200, "Login successfully"));

@@ -1,4 +1,4 @@
-import { ApiError } from "../utils/apiError.js";
+import { apiError } from "../utils/apiError.js";
 import { ApiResponse } from "../utils/apiResponse.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { User } from "../models/user.models.js";
@@ -9,7 +9,7 @@ const forgotPassword = asyncHandler(async (req, res) => {
   const user = await User.findOne({ email });
 
   if (!user) {
-    throw new ApiError(404, "User not found with this email");
+    throw new apiError(404, "User not found with this email");
   }
 
   // Generate 4-digit reset code
@@ -45,7 +45,7 @@ const forgotPassword = asyncHandler(async (req, res) => {
 
     await user.save({ validateBeforeSave: false });
 
-    throw new ApiError(500, "Email could not be sent");
+    throw new apiError(500, "Email could not be sent");
   }
 });
 
