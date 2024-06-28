@@ -3,6 +3,8 @@
 
 
 
+import 'package:flutter/material.dart';
+
 class ImageSlider extends StatelessWidget {
   const ImageSlider({super.key, this.width, required this.imageName,
   this.fit
@@ -24,6 +26,6 @@ class ImageSlider extends StatelessWidget {
     width: width ?? AppSpacing.screenWidth(context),
     child: Image(fit: BoxFit.fitWidth, image: AssetImage(imageName)),
     ), // Container
-    ), // ClipRRect
-},
-};
+    ), );// ClipRRect
+}
+}

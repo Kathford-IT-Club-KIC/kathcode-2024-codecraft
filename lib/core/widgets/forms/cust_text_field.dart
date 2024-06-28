@@ -118,6 +118,79 @@ class CustTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Container(
+      margin: EdgeInsets.symmetric(
+        horizontal: marginHorizontal ?? 0,
+        vertical: marginVertical ?? 0,
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          headerWidget ?? const SizedBox.shrink(),
+          SizedBox(
+            child: Row(
+              children: [
+                Expanded(
+                    flex: 9,
+                    child: TextFormField(
+                      textAlignVertical: TextAlignVertical.center,
+                        maxLength: maxLength,
+                      obscureText: obscureText,
+                        onEditingComplete: onEditingComplete,
+                        focusNode: focusNode,
+                      onFieldSubmitted: onFieldSubmitted,
+                        onChanged: onFieldChanged,
+                        validator: validator,
+                        keyboardType: keyboardType,
+                        controller: controller,
+                        enabled: isEnabled,
+                        style: TextStyle(
+                            color: textColor ?? AppColors.primaryText,
+                            fontSize: fontSize ?? 16.0,
+                            fontWeight: FontWeight.w600
+                    ),
+                      showCursor: showCursor,
+                      readOnly: readOnly,
+                      decoration: InputDecoration(
+                        hintText: hintText,
+                        enabled: true,
+                        isDense: true,
+                        hintStyle: TextStyle(
+                          color: hintColor,
+                          fontSize: hintFontSize ?? 16,
+                        ),
+                        labelText: labelText,
+                        labelStyle: TextStyle(
+                          color: AppColors.darkBlue,
+                          fontSize: labelFontSize?? 16,
+                          fontWeight: FontWeight.w600
+                        ),
+                        filled: true,
+                        fillColor: backgroundColor ?? AppColors.white,
+                        floatingLabelBehavior: isFLoatingLabel
+                            ? FloatingLabelBehavior.always
+                            : FloatingLabelBehavior.auto,
+
+                        floatingLabelStyle: TextStyle(
+                            color: AppColors.primaryText,
+                            fontWeight: FontWeight.w600
+                        ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(borderRadius?? 12.0),
+                          borderSide: BorderSide(
+                            width: 2.0,
+                            color: borderColor ?? AppColors.darkBlue,
+                          ),
+                        ),
+
+                      ),
+                    )
+              ],
+            ),
+          )
+        ],
+      ),
+    )
   }
 }
