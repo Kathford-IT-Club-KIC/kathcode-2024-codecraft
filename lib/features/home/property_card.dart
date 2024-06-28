@@ -6,7 +6,7 @@ class PropertyCard extends StatelessWidget{
   final String price;
   final String location;
   final String description;
-  final String status;
+  final String? status;
 
 }
 PropertyCard(
@@ -16,7 +16,7 @@ PropertyCard(
   required this.price,
   required this.location,
   required this.description,
-  required this.status,
+  this.status,
 
 });
   @override
@@ -42,10 +42,10 @@ PropertyCard(
                     Expanded(child: _buildPropertyDescription()),
                   ],
                 ),
-          ),)
+          ),),
         ],
-      )
-    )
+      ),
+    );
   }
 idget _buildPropertyImage() {
   return ClipRRect(
@@ -101,12 +101,21 @@ Widget _buildPropertyInfo() {
     ],
   );
 }
+
 Widget _buildPropertyDescription(){
     return Text(description,
     maxLines: 2, overflow: TextOverflow.clip,
     style: TextStyle(fontSize: 12, color: AppColors.primaryText),
     );
 }
-      ],
-    )
+Color returnStatusColor(String? status) {
+  if (status?.toLowerCase() == 'available') {
+    return AppColors.lightBlue;
+  }
+  else if (status?.toLowerCase() == 'booked') {
+    return AppColors.darkOrange;
+  }
+  return AppColors.green;
+}
+
 }
