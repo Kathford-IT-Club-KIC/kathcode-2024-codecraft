@@ -18,16 +18,16 @@ const getPropertyByLocation = asyncHandler(async (req, res, next) => {
   try {
     location = parseAndValidateLocation(latitude, longitude);
   } catch (error) {
-    return next(error);
+    console.error("Location validation error:", error);
+    return next(new apiError(400, "Invalid location data."));
   }
 
-  const options = {
-    page: parseInt(page, 10) || 1,
-    limit: parseInt(limit, 10) || 10,
-  };
+  const pageNum = parseInt(page, 10) || 1;
+  const limitNum = parseInt(limit, 10) || 10;
+  const skip = (pageNum - 1) * limitNum;
 
   try {
-    const aggregateQuery = Property.aggregate([
+    const aggregateQuery = [
       {
         $geoNear: {
           near: location,
@@ -36,26 +36,51 @@ const getPropertyByLocation = asyncHandler(async (req, res, next) => {
           spherical: true,
         },
       },
-    ]);
+      {
+        $skip: skip,
+      },
+      {
+        $limit: limitNum,
+      },
+    ];
 
-    const results = await Property.aggregatePaginate(aggregateQuery, options);
+    const countQuery = [
+      {
+        $geoNear: {
+          near: location,
+          distanceField: "distance",
+          maxDistance: parseFloat(distance),
+          spherical: true,
+        },
+      },
+      {
+        $count: "total",
+      },
+    ];
+
+    const results = await Property.aggregate(aggregateQuery);
+    const countResult = await Property.aggregate(countQuery);
+
+    const totalDocs = countResult.length > 0 ? countResult[0].total : 0;
+    const totalPages = Math.ceil(totalDocs / limitNum);
+
     res.status(200).json({
       status: 200,
       message: "Properties fetched successfully",
-      data: results.docs,
+      data: results,
       meta: {
-        totalDocs: results.totalDocs,
-        limit: results.limit,
-        totalPages: results.totalPages,
-        page: results.page,
-        pagingCounter: results.pagingCounter,
-        hasPrevPage: results.hasPrevPage,
-        hasNextPage: results.hasNextPage,
-        prevPage: results.prevPage,
-        nextPage: results.nextPage,
+        totalDocs,
+        limit: limitNum,
+        totalPages,
+        page: pageNum,
+        hasPrevPage: pageNum > 1,
+        hasNextPage: pageNum < totalPages,
+        prevPage: pageNum > 1 ? pageNum - 1 : null,
+        nextPage: pageNum < totalPages ? pageNum + 1 : null,
       },
     });
   } catch (error) {
+    console.error("Error fetching properties by location:", error);
     return next(new apiError(500, "Error fetching properties by location."));
   }
 });
