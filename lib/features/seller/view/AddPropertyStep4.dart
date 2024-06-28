@@ -1,3 +1,7 @@
+import 'package:flutter/material.dart';
+
+import '../model/property_info_model.dart';
+
 class AddPropertyStep4 extends StatefulWidget{
   final PropertyInfoModel propertyInfo;
   AddPropertyStep4({required this.propertyInfo});
@@ -25,7 +29,7 @@ final AddPropertyService userService =
 Future<Response>?_addPropertyFuture;
 double uploadProgress = 0;
 
-void_submitProperty(BUildContext context)
+void _submitProperty(BuildContext context)
 async{
   widget.propertyInfo.utilities = selectedUtilities;
 
@@ -35,9 +39,7 @@ setState(() {
         PropertyInfo(
           propertyInfoModel: widget.propertyInfo,
           latitude: 37.7749,
-latitude
         longitude: -122.4194,
-longitude
         ),
             (int sent, int total) {
           setState(() {
@@ -48,10 +50,9 @@ longitude
 });
 
 try{
-  Respons response = await
-      _addPropertyFuture!;
+  Response response = await _addPropertyFuture!;
   Navigation.pop(context);
-  if(response.statusCode == 201){
+  if(response.statusCode == 200 || response.statusCode ==201){
     _showUploadSuccessPopup(context);
   } else{
     _showUploadFailurePopup(context);
@@ -62,7 +63,8 @@ try{
 }
 }
 
-void_showUploadSuccessPopup(Buildcontext) {
+void _showUploadSuccessPopup(BuildContext context) {
+  showDialog(context: context, builder: BuildContext context){
   return AlertDialog(
     title: Text('Success',
     content: Text('Property uploaded successfully!'),
@@ -70,6 +72,8 @@ void_showUploadSuccessPopup(Buildcontext) {
       TextButton(
   onPressed: (){
     Navigator.of(context).pop();
+    Navigator.of(context).pop();
+
   },
   child: Text('OK'),
   ),
@@ -78,9 +82,29 @@ void_showUploadSuccessPopup(Buildcontext) {
 },
 );
 }
+void _showUploadFailurePopup(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text('Failure'),
+        content: Text('Failed to upload property. Please try again.'),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: Text('OK'),
+          ),
+        ],
+      );
+    },
+  );
+}
+
 
 @override
-Widget build(BUildContext context){
+Widget build(BuildContext context){
   return Scaffold(
     appBar: AppBar(
       leading: IconButton(
@@ -98,10 +122,10 @@ Widget build(BUildContext context){
         CrossAxisAlignment.start,
           children: [
           Text(
-          'UTILITIES'
-          style: TextSTyle(
-  fontWeight: FontWeight.bold,
-  color:Colors.grey,
+          'UTILITIES',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+              color:Colors.grey,
   ),
   ),
   SizedBox(height: 8),
@@ -111,8 +135,7 @@ Widget build(BUildContext context){
   SizedBox(height: 16),
   Expanded(
   child: GridView.builder(
-      gridDelegate:
-SliverGridDelegateWithFixedCrossAxisCount(
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
       crossAxisCount: 3,
       crossAxisSpacing: 8,
     mainAxisSpacing: 8,
@@ -120,8 +143,7 @@ SliverGridDelegateWithFixedCrossAxisCount(
   itemCount: utilities.length,
   itemBuilder: (context, index) {
   final utility = utilities[index];
-  final isSelected =
- selectedUtilities.contains(utility['name']);
+  final isSelected = selectedUtilities.contains(utility['name']);
   return GestureDetector(
   onTap: () {
   setState(() {
@@ -181,9 +203,9 @@ SliverGridDelegateWithFixedCrossAxisCount(
   ],
   ),
   ),
-  bottomNavigationBar: Bottom AppBar(
-  child: Padding(
-  padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+  bottomNavigationBar: BottomAppBar(
+    child: Padding(
+         padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
   child: Row(
   mainAxisAlignment: MainAxisAlignment.spaceBetween,
   children: [
@@ -199,7 +221,7 @@ SliverGridDelegateWithFixedCrossAxisCount(
   onPressed: () {
   AppMethods.showLoaderDialog(context);
   _submitProperty(context);
-  };
+  },
   child: Text('SUBMIT', style:
   TextStyle(fontWeight: FontWeight.bold)),
   ),
@@ -208,7 +230,7 @@ SliverGridDelegateWithFixedCrossAxisCount(
   ),
   ),
   );
-  }
+
 }
 
 
