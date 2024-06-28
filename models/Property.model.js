@@ -38,6 +38,7 @@ const propertySchema= new mongoose.Schema(
         type: [String],
         enum: [
             "1B",
+            "1BK",
             "1BHK",
             "2B",
             "2BHK",
