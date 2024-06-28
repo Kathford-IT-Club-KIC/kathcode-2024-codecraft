@@ -4,8 +4,17 @@ import {
   addProperty,
   uploadPropertyImages,
 } from "../controllers/addProperty.controller.js";
+import { bookProperty } from "../controllers/bookProperty.controller.js";
+import { cancelBooking } from "../controllers/bookProperty.controller.js";
+import { deletePropertyById } from "../controllers/deleteProperty.controller.js";
+import {
+  getAllProperties,
+  getPropertyById,
+} from "../controllers/fetchProperty.controller.js";
+import { getPropertyByLocation } from "../controllers/location.controller.js";
 
 const router = Router();
+
 router.route("/addProperty").post(
   upload.fields([
     {
@@ -26,4 +35,22 @@ router.route("/uploadImages").post(
   ]),
   uploadPropertyImages
 );
+
+//get property by location
+router.route("/location").get(getPropertyByLocation);
+//delete Property
+router.route("/:id").delete(deletePropertyById);
+
+//fetch product by id
+router.route("/:id").get(getPropertyById);
+
+//get all Property
+router.route("/").get(getAllProperties);
+
+//to book property
+router.route("/booking").post(bookProperty);
+
+//to cancel booked property
+router.route("/booking/:bookingId/cancel").put(cancelBooking);
+
 export default router;
