@@ -29,5 +29,17 @@ const bookProperty = async (req, res) => {
             startDate,
             endDate,
         });
-}
-}
+
+        //Save booking and update property status
+        await newBooking.save();
+        property.status = "booked";
+        await property.save();
+
+        res.status(201).json({
+            message: "Booking created successfully",
+            booking: newBooking,
+        });
+} catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
