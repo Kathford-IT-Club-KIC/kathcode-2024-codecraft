@@ -1,6 +1,10 @@
 
 
 
+import 'package:flutter/material.dart';
+
+import '../../constants/app_colors.dart';
+
 class ReusableButton extends StatelessWidget {
     final String text;
     final VoidCallback onPressed;
@@ -19,7 +23,7 @@ class ReusableButton extends StatelessWidget {
     final MainAxisAlignment? alignmentForText;
 
 
-    const ReusableBUtton({
+    const ReusableButton({
       Key? key,
     required this.text,
     required this.onPressed,
@@ -34,7 +38,7 @@ class ReusableButton extends StatelessWidget {
     this.fontWeight,
     this.suffixIcon,
     this.borderRadius,
-    this.borderRadiusCust, this.alignmeantForText,
+    this.borderRadiusCust, this.alignmentForText,
 }) : super(key : key);
 
     @override
