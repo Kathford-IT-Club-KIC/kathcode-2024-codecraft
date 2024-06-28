@@ -1,5 +1,7 @@
 import { asyncHandler } from "../utils/asyncHandler.ja";
 import { User } from "../models/user.models.js";
+import { ApiError } from "../utils/apiError.js";
+import { ApiResponse } from "../utils/apiResponse.js";
 const updateProfile = asyncHandler(async (req, res) => {
   try {
     const { id } = req.params;

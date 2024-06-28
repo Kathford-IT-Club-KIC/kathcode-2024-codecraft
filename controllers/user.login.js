@@ -1,7 +1,7 @@
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { User } from "../models/user.models.js";
 import { ApiError } from "../utils/apiError.js";
-import { apiResponse } from "../utils/apiResponse.js";
+import { ApiResponse } from "../utils/apiResponse.js";
 import bcrypt from "bcryptjs";
 const loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
@@ -23,7 +23,7 @@ const loginUser = asyncHandler(async (req, res) => {
       throw new ApiError(401, "Invalid email or password");
     }
     //response the success message
-    return res.status(201).json(new apiResponse(200, "Login successfully"));
+    return res.status(201).json(new ApiResponse(200, "Login successfully"));
   } catch (error) {
     return res.status(500).json({ message: "Error occur while login", error });
   }

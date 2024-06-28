@@ -1,6 +1,6 @@
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiError } from "../utils/apiError.js";
-import { apiResponse } from "../utils/apiResponse.js";
+import { ApiResponse } from "../utils/apiResponse.js";
 
 const registerUser = asyncHandler(async (req, res) => {
   const { firstname, lastname, email, password } = req.body;
@@ -31,7 +31,7 @@ const registerUser = asyncHandler(async (req, res) => {
     //respond the success message
     return res
       .status(201)
-      .json(new apiResponse(200, "User registration completed"));
+      .json(new ApiResponse(200, "User registration completed"));
   } catch (error) {
     return res
       .status(500)
