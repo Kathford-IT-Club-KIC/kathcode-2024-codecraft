@@ -6,7 +6,7 @@ class ContactUsPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Contact Us'),
-      ),
+      ), //Appbar
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -24,6 +24,7 @@ class ContactUsPage extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ), //textstyle
             ), //text
+            SizedBox(height: 16),
             Row(
               children: [
                 Icon(Icons.location_on,color: Colors.blue),
@@ -57,14 +58,28 @@ class ContactUsPage extends StatelessWidget {
               Expanded(
                 child: Text(
                'contact@easyghar.com'
-                style
-    )
-    )
-    ]
-    )
-          ]
-        )
-      )
-    )
+                style: TextStyle(fontSize: 16),
+    ),   //text
+    ),  //expanded
+    ],
+    ),  //row
+    SizedBox(height: 16),
+    Row(
+     children: [
+       Icon(Icons.language, color: Colors.blue),
+        SizedBox(height: 16),
+        Expanded(
+        child: Text(
+        'www.easyghar.com',
+    style: TextStyle(fontSize: 16),
+        ),  //text
+        ), //expanded
+
+    ],
+    ),   //row
+          ],
+        ), //column
+      ), //padding
+    ); //scaffold
   }
 }
