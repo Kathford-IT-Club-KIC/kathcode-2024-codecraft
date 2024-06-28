@@ -2,7 +2,8 @@ import { apiError } from "../utils/apiError.js";
 import { ApiResponse } from "../utils/apiResponse.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { User } from "../models/user.models.js";
-import crypto from "crypto-js";
+import crypto from "crypto";
+
 const forgotPassword = asyncHandler(async (req, res) => {
   const { email } = req.body;
   //check user
