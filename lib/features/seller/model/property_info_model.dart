@@ -18,6 +18,9 @@ PropertyInfoModel(
   required this.title,
   required this.description,
   required this.address,
+  required this.contactNumber,
+  required this.amount,
 
 }
 )
+

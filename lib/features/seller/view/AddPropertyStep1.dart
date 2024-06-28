@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hackathon_easyghar/features/seller/model/property_info_model.dart';
 
 class Addpropertystep1 extends StatefulWidget {
   const Addpropertystep1({super.key});
@@ -24,8 +25,27 @@ class _Addpropertystep1State extends State<Addpropertystep1> {
     _priceController.dispose();
     super.dispose();
   }
+  void _navigateToNextPage(BuildContext context){
+
+  }
 
   Widget build(BuildContext context) {
+    if (_titleController.text.isEmpty) {
+      setState(() {
+        showError = true;
+      });
+    }
+    else
+      {
+        setState(() {
+          showError=false;
+        });
+        final propertyInfo=PropertyInfoModel(title: _titleController.text,
+            description: _descriptionController.text,
+            address: _addressController.text,
+            contactNumber: _priceController.text,
+            amount: _priceController.text,);
+      }
     return const Placeholder();
   }
 }
