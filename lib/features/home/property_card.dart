@@ -47,3 +47,32 @@ PropertyCard(
       )
     )
   }
+idget _buildPropertyImage() {
+  return ClipRRect(
+    borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+    child: Image.network(
+      imageUrl,
+      height: 180,
+      width: double.infinity,
+      fit: BoxFit.cover,
+    ),
+  );
+}
+Widget _buildPropertyInfo(){
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          title,
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: AppColors.black),
+        ),
+        SizedBox(height: 8),
+        Row(
+          children: [
+            Expanded(child: Text(price, style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: AppColors.lightBlue),
+            ),),
+          ],
+        )
+      ],
+    )
+}
