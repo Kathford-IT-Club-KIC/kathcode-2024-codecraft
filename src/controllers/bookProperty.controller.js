@@ -43,3 +43,21 @@ const bookProperty = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+//Cancel a booking
+const cancelBooking = async (req, res) => {
+    try {
+        const { bookingId } = req.params;
+
+        //Finding booking in ID
+        const booking = await Booking.findById(bookingId);
+        if (!booking) {
+            return res.status(404).json({ message: "Booking not found" });
+        }
+
+        // Find the associated property
+        const property = await Property.findById(booking.property);
+        if (!property) {
+            return res.status(404).json({ message: "Property not found" });
+        }
+    }
