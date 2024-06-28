@@ -6,7 +6,6 @@ import UserRoute from "./routes/user.routes.js";
 // import propertyRoute from "./routes/property.routes.js";
 // import chatRoutes from "./routes/chat.routes.js";
 // import { saveMessage, getMessages } from "./controllers/chat.controllers.js";
-import mongoose from "mongoose";
 const app = express();
 
 // Middleware configuration
@@ -44,7 +43,7 @@ io.on("connection", (socket) => {
 
 // Routes
 app.use("/users", UserRoute);
-// app.use("/api/v1/properties", propertyRoute);
-// app.use("/api/v1/chats", chatRoutes);
+// app.use("/properties", propertyRoute);
+// app.use("/chats", chatRoutes);
 
 export default server;
