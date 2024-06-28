@@ -82,4 +82,24 @@ try {
     } catch (error) {
         return next(new ApiError(400, "Invalid location data"));
     }
+
+ // Check for property images in the request
+const propertyImagefiles = req.files?.propertyImage;
+const propertyImageUrls = await handleImageUpload(propertyImagefiles, next);
+if (!propertyImageUrls) return;
+
+try{
+    const newProperty = new Property({
+        title,
+        description,
+        address,
+        location: parsedLocation,
+        propertyImage: propertyImageUrls,
+        amount,
+        categories,
+        contactNumber,
+        amentities,
+    });
+}
+
 );
