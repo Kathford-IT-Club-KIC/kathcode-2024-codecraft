@@ -24,7 +24,7 @@ class PremiumFlats extends StatelessWidget {
     child: ListView.builder(
       scrollDirection: Axis.horizontal,
       itemCount: 4,
-      itemBUilder: (Build Context content, int index){
+      itemBUilder: (Build Context context, int index){
         return InkWell(
         onTap: (){
           Navigator.push(context, MaterialPageRoute(builder: (builder)) => PropertyDetailPage(
