@@ -10,7 +10,7 @@ import {
   forgotPassword,
 } from "../controllers/user.forgotPassword.js";
 
-const router = Router;
+const router = Router();
 
 // Register route
 router.route("/register").post(registerUser);

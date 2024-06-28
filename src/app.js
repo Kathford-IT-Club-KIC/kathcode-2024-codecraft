@@ -6,7 +6,7 @@ import UserRoute from "./routes/user.routes.js";
 // import propertyRoute from "./routes/property.routes.js";
 // import chatRoutes from "./routes/chat.routes.js";
 // import { saveMessage, getMessages } from "./controllers/chat.controllers.js";
-
+import mongoose from "mongoose";
 const app = express();
 
 // Middleware configuration
