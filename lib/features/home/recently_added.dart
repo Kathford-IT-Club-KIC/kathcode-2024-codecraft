@@ -5,7 +5,9 @@
 
 
 
-classa RecentlyAdded extends StatelessWidget{
+import '../../core/constants/app_colors.dart';
+
+class RecentlyAdded extends StatelessWidget{
   const RecentlyAdded({super.key});
 
   @override

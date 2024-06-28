@@ -1,5 +1,9 @@
 
 
+import 'package:flutter/material.dart';
+
+import '../../core/constants/app_colors.dart';
+
 class PremiumFlats extends StatelessWidget {
   const PremiumFlats({super.key});
 
@@ -37,7 +41,7 @@ class PremiumFlats extends StatelessWidget {
           contactNumber: '+1234567890',
           nearbyLocations: ['Park', 'SuperMarket', 'School', 'Hospital'],
 
-    ))); //PropertyDetail, MaterialPageRoute
+    ),),); //PropertyDetail, MaterialPageRoute
     },
 
     child: Container(

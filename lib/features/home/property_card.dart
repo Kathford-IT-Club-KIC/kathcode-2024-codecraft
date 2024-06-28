@@ -1,5 +1,7 @@
 import 'package:flutter/widgets.dart';
 
+import '../../core/constants/app_colors.dart';
+
 class PropertyCard extends StatelessWidget{
   final String imageUrl;
   final String title;
@@ -90,7 +92,7 @@ Widget _buildPropertyInfo() {
       SizedBox(height: 8),
       Row(
         children: [
-          Icon(Icons.location_on, color: AppsColors.lightBlue),
+          Icon(Icons.location_on, color: AppColors.lightBlue),
           SizedBox(width: 4),
           Expanded(child: Text(
             location,
