@@ -98,36 +98,17 @@ class CustTextField extends StatelessWidget {
   Widget build(BuildContext context)
   {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: marginHorizontal ?? 0,
-      vertical: marginVertical ?? 0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          headerWidget ?? const SizedBox.shrink(),
-        ],
-      ),,
-    ),
-  }
-
-
-
-
-
-  const CustTextField({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
       margin: EdgeInsets.symmetric(
-        horizontal: marginHorizontal ?? 0,
-        vertical: marginVertical ?? 0,
+          horizontal: marginHorizontal ?? 0,
+      vertical: marginVertical ?? 0,
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           headerWidget ?? const SizedBox.shrink(),
+
+
           SizedBox(
             child: Row(
               children: [
@@ -183,14 +164,42 @@ class CustTextField extends StatelessWidget {
                             color: borderColor ?? AppColors.darkBlue,
                           ),
                         ),
+                        counterText: "",
+                        prefixIcon: prefixIcon! =null
+                          ? SizedBox.square(
+                          dimension: 18,
+                          child: InkWell(
+                            onTap: onPrefixIconClick,
+                            child: prefixIcon,
+                          ),
+                        ):null,suffixIcon: suffixIcon!=null
+                          ?SizedBox.square(dimension: 18,
+                      child: InkWell(
+                        onTap: onSuffixIconClick,
+                        child: suffixIcon,
+                      ),
+                      )
+                      ), maxLines: maxLines ?? 1,
 
                       ),
-                    )
+                    ),
+                suffixText != null
+                    ? Expanded(
+                  flex : 2,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 12),
+                    child: CText(
+                      suffixText ?? '',
+                      color: hintColor,
+                      fontSize: hintFontSize ?? 18,
+                    ),
+                  ),
+                ):const SizedBox.shrink(),
               ],
             ),
           )
         ],
       ),
-    )
+    );
   }
 }
