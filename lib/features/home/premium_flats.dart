@@ -16,7 +16,7 @@ class PremiumFlats extends StatelessWidget {
              color: AppColors.darkBlue,
             ), //CText
     ), //padding
-///Horizontal Property List
+///Horizontal Property Lists
     Padding(
             padding: const EgdeInsets.symmetric(vertical: 16.0),
             child: SizedBox(
