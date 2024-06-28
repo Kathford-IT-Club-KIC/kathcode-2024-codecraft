@@ -12,7 +12,9 @@ import {
   getPropertyById,
 } from "../controllers/fetchProperty.controller.js";
 import { getPropertyByLocation } from "../controllers/location.controller.js";
+import { searchProperty } from "../controllers/searchProperty.controller.js";
 
+import { nearestLocation } from "../controllers/nearestlocationRecommendation.controller.js";
 const router = Router();
 
 router.route("/addProperty").post(
@@ -35,6 +37,12 @@ router.route("/uploadImages").post(
   ]),
   uploadPropertyImages
 );
+
+//search Property
+router.route("/searchProperty").get(searchProperty);
+
+//nearest location recommendation
+router.route("/nearest").get(nearestLocation);
 
 //get property by location
 router.route("/location").get(getPropertyByLocation);
