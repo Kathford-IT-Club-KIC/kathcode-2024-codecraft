@@ -2,6 +2,8 @@
 
 
 
+import 'package:flutter/material.dart';
+
 enum TextType{
   displayLarge,
   displayMedium,
@@ -90,7 +92,7 @@ class CText extends StatelessWidget {
       text,
       textAlign: textAlign,
       style: _getStyle(context).copyWith(fontWeight: fontWeight, fontSize: fontSize, height: lineHeight),
-      marLines: maxLines,
+      maxLines: maxLines,
     );
     }
     }

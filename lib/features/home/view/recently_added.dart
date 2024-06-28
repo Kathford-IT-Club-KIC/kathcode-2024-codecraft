@@ -1,7 +1,7 @@
 
 
 <<<<<<< HEAD
-import '../../core/constants/app_colors.dart';
+import '../../../core/constants/app_colors.dart';
 
 =======
 >>>>>>> ea03dda8547c420cca78f1379d8fcd3bb7698568
