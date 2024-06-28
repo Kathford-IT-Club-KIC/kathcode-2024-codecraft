@@ -12,17 +12,11 @@ const uploadCloudinary = async (localFilepath, publicId) => {
   try {
     if (!localFilepath) return null;
 
-    console.log(
-      `Uploading file: ${localFilepath} to Cloudinary with public ID: ${publicId}`
-    );
-
     // Upload local file to Cloudinary
     const response = await cloudinary.uploader.upload(localFilepath, {
       resource_type: "auto",
       public_id: publicId,
     });
-
-    console.log(`File uploaded successfully. Cloudinary URL: ${response.url}`);
 
     // Delete local file
     if (fs.existsSync(localFilepath)) {

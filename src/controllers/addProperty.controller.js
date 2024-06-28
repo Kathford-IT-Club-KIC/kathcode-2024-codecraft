@@ -22,13 +22,11 @@ const handleImageUpload = async (files, next) => {
           const imageUrl = await uploadCloudinary(file.path);
           return imageUrl.url;
         } catch (error) {
-          console.error("Cloudinary Upload Error", error);
           throw new apiError(500, "Error uploading image to Cloudinary");
         }
       })
     );
   } catch (error) {
-    console.error("Image Upload Error", error);
     throw new apiError(500, `Error uploading image: ${error.message}`);
   }
 };
