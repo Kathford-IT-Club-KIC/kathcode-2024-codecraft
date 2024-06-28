@@ -113,6 +113,23 @@ try{
             new ApiError(400, `Validation error: $(validationError.message)`),
         );
     }
-}
 
-);
+    //Save the property to the database
+    await newProperty.save();
+
+    //Send a response with the created property
+    return res.status(201).json({
+        status: 201,
+        message: "Property added successfully",
+        property: newProperty,
+});
+} catch(error) {
+    console.error("Database error: Error adding property to database", error);
+    return next(
+        new ApiError(500, `Error adding property to database: $(error.message)`)
+    );
+}
+});
+
+export { addProperty, uploadPropertyImages };
+
