@@ -1,5 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken"; // Add this import statement
 
 const userSchema = new mongoose.Schema(
   {
@@ -12,7 +13,7 @@ const userSchema = new mongoose.Schema(
     },
     firstname: {
       type: String,
-      reequired: true,
+      required: true,
     },
     lastname: {
       type: String,
@@ -45,7 +46,7 @@ userSchema.methods.isPasswordCorrect = async function (password) {
 
 userSchema.methods.generateAccessToken = function () {
   try {
-    //'this' refers to the current user interface
+    //'this' refers to the current user instance
     const token = jwt.sign(
       { _id: this._id, email: this.email, username: this.username },
       process.env.ACCESS_TOKEN_SECRET,
@@ -60,15 +61,20 @@ userSchema.methods.generateAccessToken = function () {
   }
 };
 
-userSchema.methods.generateAccessToken = function () {
+userSchema.methods.generateRefreshToken = function () {
   try {
-    const token = jwt.sign({ _id: this_id }, process.env.REFRESH_TOKEN_SECRET, {
-      expiresIn: process.env.REFRESH_TOKEN_EXPIRY,
-    });
+    const token = jwt.sign(
+      { _id: this._id },
+      process.env.REFRESH_TOKEN_SECRET,
+      {
+        expiresIn: process.env.REFRESH_TOKEN_EXPIRY,
+      }
+    );
     return token;
   } catch (error) {
-    console.error("Error generating access token", error);
+    console.error("Error generating refresh token:", error);
     throw error;
   }
 };
+
 export const User = mongoose.model("User", userSchema);
