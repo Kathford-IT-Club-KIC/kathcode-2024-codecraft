@@ -48,13 +48,34 @@ userSchema.methods.generateAccessToken = function (){
     try{
         //'this' refers to the current user interface
         const token = jwt.sign(
-            {_id: this_id, email: this,email, username: this.username },
-            process.env.JWT_SECRET,
+            {_id: this._id, email: this.email, username: this.username },
+            process.env.ACCESS_TOKEN_SECRET,
             {
-                expiresIn :
-            }
-        )
+                expiresIn : process.env.ACCESS_TOKEN_EXPIRY,
+            },
+        );
+        return token;
+    } catch (error) {
+        console.error("Error generating access token:", error);
+        throw error;
     }
-}
+};
+
+userSchema.methods.generateAccessToken = function(){
+    try{
+        const token = jwt.sign(
+            {_id: this_id },
+            process.env.REFRESH_TOKEN_SECRET,
+            {
+                expiresIn: process.env.REFRESH_TOKEN_EXPIRY,
+            },
+        );
+        return token;
+        } catch (error) {
+            console.error("Error generating access token", error);
+            throw error;
+        }
+    };
+    export const User = mongoose.mode("User", userSchema);
 
 
