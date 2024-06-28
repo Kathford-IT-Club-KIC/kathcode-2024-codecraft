@@ -20,11 +20,12 @@ router.route("/login").post(loginUser);
 router.route("/logout").post(verifyJWT, logoutUser);
 //change password
 router.route("/passwordchange").post(verifyJWT, changePassword);
-//update profile
-router.route("/:id").put(updateProfile);
+
 //forgot password
 router.route("/forgotpassword").post(forgotPassword);
 //reset password
 router.route("/passwordreset").put(resetPassword);
 
+//update profile
+router.route("/:id").put(updateProfile);
 export default router;

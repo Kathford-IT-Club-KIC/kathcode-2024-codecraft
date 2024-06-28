@@ -3,6 +3,7 @@ import { ApiResponse } from "../utils/apiResponse.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { User } from "../models/user.models.js";
 import crypto from "crypto";
+import sendEmail from "../utils/sendEmail.js";
 
 const forgotPassword = asyncHandler(async (req, res) => {
   const { email } = req.body;
@@ -52,8 +53,7 @@ const forgotPassword = asyncHandler(async (req, res) => {
 
 //to reset password
 const resetPassword = asyncHandler(async (req, res) => {
-  const { resetCode } = req.body;
-  const { password } = req.body;
+  const { resetCode, password } = req.body;
 
   // Hash the code
   const hashedCode = crypto
@@ -68,7 +68,7 @@ const resetPassword = asyncHandler(async (req, res) => {
   });
 
   if (!user) {
-    throw new ApiError(400, "Invalid or expired code");
+    throw new apiError(400, "Expired code");
   }
 
   // Set new password
@@ -76,11 +76,15 @@ const resetPassword = asyncHandler(async (req, res) => {
   user.resetPasswordToken = undefined;
   user.resetPasswordExpire = undefined;
 
-  await user.save();
-
-  return res
-    .status(200)
-    .json(new ApiResponse(200, {}, "Password reset successfully"));
+  try {
+    await user.save();
+    return res
+      .status(200)
+      .json(new ApiResponse(200, {}, "Password reset successfully"));
+  } catch (err) {
+    console.error("Error saving user:", err);
+    throw new apiError(500, "Error resetting password");
+  }
 });
 
 export { resetPassword, forgotPassword };
