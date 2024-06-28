@@ -47,4 +47,10 @@ const addProperty = asyncHandler(async (req, res, next) => {
         amentities,
         categories,
 } = req.body;
+
+//Validate required fields
+if (!title || !description || !address || !amount || !categories){
+    return next(new ApiError(400, "All fields are required"));
+}
+
 );
