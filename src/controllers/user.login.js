@@ -29,10 +29,16 @@ const loginUser = asyncHandler(async (req, res) => {
 
     //generate access token
     const refreshToken = user.generateRefreshToken();
+
     // Respond with success message
-    return res.status(200).json(new ApiResponse(200, "Login successful"));
+    return res.status(200).json(
+      new ApiResponse(200, "Login successful", {
+        refreshToken,
+        accessToken,
+      })
+    );
   } catch (error) {
-    // Handle errors
+    //error handling
     console.error("Error occurred while logging in:", error);
     return res.status(error.statusCode || 500).json({
       message: error.message || "Error occurred while logging in",
