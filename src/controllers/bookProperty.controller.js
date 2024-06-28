@@ -60,4 +60,22 @@ const cancelBooking = async (req, res) => {
         if (!property) {
             return res.status(404).json({ message: "Property not found" });
         }
+
+        // Update booking status to 'Cancelled' (if such a status exists in your Booking model)
+        booking.status = "Cancelled";
+
+        //Remove the booking
+        await Booking.deleteOne({_id: bookingId });
+
+        // Update property status to 'available'
+        property.status = "available";
+        await property.save();
+
+        res.status(200).json({
+            message: "Booking cancelled successfully",
+            booking,        
+        });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
     }
+};
