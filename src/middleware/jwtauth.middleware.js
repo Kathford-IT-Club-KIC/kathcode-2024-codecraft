@@ -8,14 +8,14 @@ const verifyJWT = asyncHandler(async (req, res, next) => {
     const token = req.header("Authorization")?.replace("Bearer ", "");
 
     if (!token) {
-      return next(new ApiError(401, "Unauthorized request"));
+      return next(new apiError(401, "Unauthorized request"));
     }
 
     let decodeToken;
     try {
       decodeToken = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
     } catch (err) {
-      return next(new ApiError(401, "Invite access token"));
+      return next(new apiError(401, "Invite access token"));
     }
 
     const user = await User.findById(decodeToken?._id).select(
@@ -23,7 +23,7 @@ const verifyJWT = asyncHandler(async (req, res, next) => {
     );
 
     if (!user) {
-      return next(new ApiError(401, "Invalid Access Token"));
+      return next(new apiError(401, "Invalid Access Token"));
     }
 
     req.user = user;
