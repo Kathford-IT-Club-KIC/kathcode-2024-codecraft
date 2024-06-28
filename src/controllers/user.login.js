@@ -24,7 +24,11 @@ const loginUser = asyncHandler(async (req, res) => {
     if (!isMatch) {
       throw new apiError(401, "Invalid email or password");
     }
+    //generate access token
+    const accessToken = user.generateAccessToken();
 
+    //generate access token
+    const refreshToken = user.generateRefreshToken();
     // Respond with success message
     return res.status(200).json(new ApiResponse(200, "Login successful"));
   } catch (error) {
