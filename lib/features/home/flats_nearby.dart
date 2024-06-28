@@ -47,7 +47,7 @@ class FlatsNearBy extends StatelessWidget {
     price: '\$1200/month',
     location: '123 Main Street, City, Country',
     description: 'This beautiful 2BHK flat is located in the heart of the city and offers stunning view',
-    ), //property card
+    ), //property cards
     ), //container
     ); //inkwell
    },
