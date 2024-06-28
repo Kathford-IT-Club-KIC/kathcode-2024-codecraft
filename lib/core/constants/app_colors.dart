@@ -15,5 +15,4 @@ class AppColors{
   static const Color greyStroke= Color(0xFFD2CFCF);
   static const Color hintTextColor= Color(0xFF9E9E9E);
   static const Color offWhite= Color(0xFFf0f0f0);
-  static const Color cyan= Color(value)
 }

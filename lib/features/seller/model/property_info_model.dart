@@ -1,3 +1,5 @@
+import 'dart:io';
+
 class PropertyInfoModel{
   String title;
   String description;
@@ -10,11 +12,9 @@ class PropertyInfoModel{
   int bathroomCount;
   int kitchenCount;
   int diningCount;
-  List<XFile> images;
+  List<File> images;
   Set<String> utilities;
-}
-PropertyInfoModel(
-{
+ PropertyInfoModel({
   required this.title,
   required this.description,
   required this.address,
@@ -27,8 +27,7 @@ this.bathroomCount=1,
 this.kitchenCount = 1,
 this.diningCount = 1,
 this.images = const [],
-this.utilities = const{},
+this.utilities = const{},});
 
 }
-);
 

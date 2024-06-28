@@ -1,5 +1,9 @@
 
 
+import 'package:flutter/material.dart';
+
+import '../../core/constants/app_colors.dart';
+
 class FlatsNearBy extends StatelessWidget {
   const FlatsNearby({super.key});
 
@@ -12,12 +16,12 @@ class FlatsNearBy extends StatelessWidget {
 
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-          child: CText("Flats Nearby", type: TextType.displayLarge,
+          child: Text("Flats Nearby", style: TextStyle(fontSize: 30,),
             color: AppColors.darkBlue,
           ),
         ),
         ///Horizontal Property List
-      padding(
+      Padding(
         padding: const EdgeInsets.symmetric(vertical: 16.0),
         child: SizedBox(
           height: 400, //adjust height as needed

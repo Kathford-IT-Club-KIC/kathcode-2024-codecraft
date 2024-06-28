@@ -16,7 +16,7 @@ class ContactUsPage extends StatelessWidget {
           children: [
             Image.asset(
               "assets/logo/logo.png",
-              height: MediaQuery.of(context).size.height * 0.15''
+              height: MediaQuery.of(context).size.height * 0.15
             ), //image.asset
             SizedBox(height: 16),
             Text(
@@ -30,7 +30,7 @@ class ContactUsPage extends StatelessWidget {
             Row(
               children: [
                 Icon(Icons.location_on,color: Colors.blue),
-                SizedBOx(width: 8),
+                SizedBox(width: 8),
                 Expanded(
                   child:Text(
                     'Balkumari, Lalitpur, Nepal',
