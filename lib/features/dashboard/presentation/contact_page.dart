@@ -1,5 +1,7 @@
 
 
+import 'package:flutter/material.dart';
+
 class ContactUsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -32,7 +34,7 @@ class ContactUsPage extends StatelessWidget {
                 Expanded(
                   child:Text(
                     'Balkumari, Lalitpur, Nepal',
-                    style: Textstyle(fontSize: 16),
+                    style: TextStyle(fontSize: 16),
                   ), //text
                 ), //Expanded
               ],
@@ -44,7 +46,7 @@ class ContactUsPage extends StatelessWidget {
                 SizedBox(width: 8),
                 Expanded(
                   child: Text(
-                    '+1 234 567 890'
+                    '+1 234 567 890',
                         style: TextStyle(fontSize: 16),
                   ), //text
                 ), //expanded
@@ -57,7 +59,7 @@ class ContactUsPage extends StatelessWidget {
               SizedBox(width: 8),
               Expanded(
                 child: Text(
-               'contact@easyghar.com'
+               'contact@easyghar.com',
                 style: TextStyle(fontSize: 16),
     ),   //text
     ),  //expanded

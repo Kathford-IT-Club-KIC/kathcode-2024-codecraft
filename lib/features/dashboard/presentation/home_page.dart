@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../core/constants/app_colors.dart';
+
 class HomePage extends StatelessWidget {
    HomePage({super.key});
    final List<Data> data =[
