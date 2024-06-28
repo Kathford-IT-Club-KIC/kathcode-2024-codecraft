@@ -3,7 +3,7 @@ import cors from "cors";
 import http from "http";
 import { Server } from "socket.io";
 import UserRoute from "./routes/user.routes.js";
-// import propertyRoute from "./routes/property.routes.js";
+import propertyRoute from "./routes/property.routes.js";
 // import chatRoutes from "./routes/chat.routes.js";
 // import { saveMessage, getMessages } from "./controllers/chat.controllers.js";
 const app = express();
@@ -43,7 +43,7 @@ io.on("connection", (socket) => {
 
 // Routes
 app.use("/users", UserRoute);
-// app.use("/properties", propertyRoute);
+app.use("/properties", propertyRoute);
 // app.use("/chats", chatRoutes);
 
 export default server;

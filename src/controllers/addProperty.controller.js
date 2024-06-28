@@ -1,117 +1,117 @@
 import { Property } from "../models/Property.models.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
-import { ApiError } from "../utils/apiError.js";
-import { uploadOnCloudinary } from "../utils/cloudinary.js";
-import { parseAndValidateLocation } from "../parseAndValidateLocation.controller.js";
+import { apiError } from "../utils/apiError.js";
+import { uploadCloudinary } from "../utils/cloudinary.js";
+import { parseAndValidateLocation } from "../controllers/parseAndValidateLocation.controller.js";
 
-const uploadPropertyImages= asyncHandler(async (req, res, next) => {
-    const propertyImagefiles = req.files?.propertyImage;
-    const propertyImageUrls = await handleImageUpload(propertyImagefiles, next);
-    if (!propertyImageUrls) return;
-    return { imageUrls: propertyImageUrls };
+const uploadPropertyImages = asyncHandler(async (req, res, next) => {
+  const propertyImagefiles = req.files?.propertyImage;
+  const propertyImageUrls = await handleImageUpload(propertyImagefiles, next);
+  if (!propertyImageUrls) return;
+  return { imageUrls: propertyImageUrls };
 });
 
 //New function to handle image upload
 const handleImageUpload = async (files, next) => {
-    if (files || files.length == 0){
-        return next(new ApiError(400, "At least one property image is required"));
-    }
-    try{
-        return await Promise.all(
-            files.map(async (file) => {
-                try{
-                   const imageUrl = await uploadOnCloudinary(file.path);
-                   return imageUrl.url;
-                } catch (error){
-                    console.error("Cloudinary Upload Error", error);
-                    throw new ApiError(500, "Error uploading image is Cloudinary");
-                }
-            }),
-        );
-} catch (error) {
+  if (files || files.length == 0) {
+    return next(new apiError(400, "At least one property image is required"));
+  }
+  try {
+    return await Promise.all(
+      files.map(async (file) => {
+        try {
+          const imageUrl = await uploadCloudinary(file.path);
+          return imageUrl.url;
+        } catch (error) {
+          console.error("Cloudinary Upload Error", error);
+          throw new apiError(500, "Error uploading image is Cloudinary");
+        }
+      })
+    );
+  } catch (error) {
     console.error("Image Upload Error", error);
-    throw new ApiError(500, `Error uploading image: ${error.message}`);
-    }
+    throw new apiError(500, `Error uploading image: ${error.message}`);
+  }
 };
 
 //to create property
 const addProperty = asyncHandler(async (req, res, next) => {
-    const { 
-        title,
-        description,
-        address,
-        latitude,
-        longitude,
-        amount,
-        contactNumber,
-        amentities,
-        categories,
-} = req.body;
+  const {
+    title,
+    description,
+    address,
+    latitude,
+    longitude,
+    amount,
+    contactNumber,
+    amentities,
+    categories,
+  } = req.body;
 
-//Validate required fields
-if (!title || !description || !address || !amount || !categories){
-    return next(new ApiError(400, "All fields are required"));
-}
+  //Validate required fields
+  if (!title || !description || !address || !amount || !categories) {
+    return next(new apiError(400, "All fields are required"));
+  }
 
-// Ensure latitude and longitude are within valid ranges
-let validLatitude = parseFloat(latitude);
-let validLongitude = parseFloat(longitude);
-if(
-    validLatitude < -90 || 
-     validLatitude > 90 || 
-     validLongitude < -180 || 
-     validLongitude > 180
-) {
+  // Ensure latitude and longitude are within valid ranges
+  let validLatitude = parseFloat(latitude);
+  let validLongitude = parseFloat(longitude);
+  if (
+    validLatitude < -90 ||
+    validLatitude > 90 ||
+    validLongitude < -180 ||
+    validLongitude > 180
+  ) {
     if (
-        validLatitude >= -180 &&
-        validLatitude <= 180 &&
-        validLongitude >= -90 &&
-        validLongitude <= 90
+      validLatitude >= -180 &&
+      validLatitude <= 180 &&
+      validLongitude >= -90 &&
+      validLongitude <= 90
     ) {
-        [validLatitude, validLongitude] = [validLongitude, validLatitude];
-    } else{
-        return next(new ApiError(400, "Invalid latitude or longitude values"));
+      [validLatitude, validLongitude] = [validLongitude, validLatitude];
+    } else {
+      return next(new apiError(400, "Invalid latitude or longitude values"));
     }
-}
+  }
 
-// Validate and parse location
-let parsedLocation;
-try {
+  // Validate and parse location
+  let parsedLocation;
+  try {
     parsedLocation = parseAndValidateLocation(validLatitude, validLongitude);
     console.log("Parsed Location:", parsedLocation);
-    } catch (error) {
-        return next(new ApiError(400, "Invalid location data"));
-    }
+  } catch (error) {
+    return next(new apiError(400, "Invalid location data"));
+  }
 
- // Check for property images in the request
-const propertyImagefiles = req.files?.propertyImage;
-const propertyImageUrls = await handleImageUpload(propertyImagefiles, next);
-if (!propertyImageUrls) return;
+  // Check for property images in the request
+  const propertyImagefiles = req.files?.propertyImage;
+  const propertyImageUrls = await handleImageUpload(propertyImagefiles, next);
+  if (!propertyImageUrls) return;
 
-try{
+  try {
     const newProperty = new Property({
-        title,
-        description,
-        address,
-        location: parsedLocation,
-        propertyImage: propertyImageUrls,
-        amount,
-        categories,
-        contactNumber,
-        amentities,
+      title,
+      description,
+      address,
+      location: parsedLocation,
+      propertyImage: propertyImageUrls,
+      amount,
+      categories,
+      contactNumber,
+      amentities,
     });
 
     //Validate the property before saving
-    try{
-        await newProperty.validate();
+    try {
+      await newProperty.validate();
     } catch (validationError) {
-        console.error(
-            "Validation Error: Property validation failed",
-            validationError,
-        );
-        return next(
-            new ApiError(400, `Validation error: $(validationError.message)`),
-        );
+      console.error(
+        "Validation Error: Property validation failed",
+        validationError
+      );
+      return next(
+        new apiError(400, `Validation error: $(validationError.message)`)
+      );
     }
 
     //Save the property to the database
@@ -119,17 +119,16 @@ try{
 
     //Send a response with the created property
     return res.status(201).json({
-        status: 201,
-        message: "Property added successfully",
-        property: newProperty,
-});
-} catch(error) {
+      status: 201,
+      message: "Property added successfully",
+      property: newProperty,
+    });
+  } catch (error) {
     console.error("Database error: Error adding property to database", error);
     return next(
-        new ApiError(500, `Error adding property to database: $(error.message)`)
+      new apiError(500, `Error adding property to database: $(error.message)`)
     );
-}
+  }
 });
 
 export { addProperty, uploadPropertyImages };
-
