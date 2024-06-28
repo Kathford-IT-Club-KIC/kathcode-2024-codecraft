@@ -33,3 +33,18 @@ const handleImageUpload = async (files, next) => {
     throw new ApiError(500, `Error uploading image: ${error.message}`);
     }
 };
+
+//to create property
+const addProperty = asyncHandler(async (req, res, next) => {
+    const { 
+        title,
+        description,
+        address,
+        latitude,
+        longitude,
+        amount,
+        contactNumber,
+        amentities,
+        categories,
+} = req.body;
+);
