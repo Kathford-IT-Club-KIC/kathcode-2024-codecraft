@@ -74,4 +74,12 @@ if(
     }
 }
 
+// Validate and parse location
+let parsedLocation;
+try {
+    parsedLocation = parseAndValidateLocation(validLatitude, validLongitude);
+    console.log("Parsed Location:", parsedLocation);
+    } catch (error) {
+        return next(new ApiError(400, "Invalid location data"));
+    }
 );
