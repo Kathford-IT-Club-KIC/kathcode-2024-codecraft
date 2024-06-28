@@ -58,21 +58,55 @@ idget _buildPropertyImage() {
     ),
   );
 }
-Widget _buildPropertyInfo(){
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          title,
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: AppColors.black),
-        ),
-        SizedBox(height: 8),
-        Row(
-          children: [
-            Expanded(child: Text(price, style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: AppColors.lightBlue),
-            ),),
-          ],
-        )
+Widget _buildPropertyInfo() {
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Text(
+        title,
+        style: TextStyle(
+            fontSize: 20, fontWeight: FontWeight.bold, color: AppColors.black),
+      ),
+      SizedBox(height: 8),
+      Row(
+        children: [
+          Expanded(child: Text(price, style: TextStyle(fontSize: 20,
+              fontWeight: FontWeight.w500,
+              color: AppColors.lightBlue),
+          ),),
+          Expanded(
+            child: Text(
+              "Status : ${status
+                  .toString()
+                  .capitalizeFirstLetter}",
+              style: TextStyle(fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                  color: returnStatusColor(status)),
+            ),
+          ),
+
+        ],
+      ),
+      SizedBox(height: 8),
+      Row(
+        children: [
+          Icon(Icons.location_on, color: AppsColors.lightBlue),
+          SizedBox(width: 4),
+          Expanded(child: Text(
+            location,
+            style: TextStyle(fontSize: 12, color: AppColors.primaryText),
+          ),),
+        ],
+      ),
+    ],
+  );
+}
+Widget _buildPropertyDescription(){
+    return Text(description,
+    maxLines: 2, overflow: TextOverflow.clip,
+    style: TextStyle(fontSize: 12, color: AppColors.primaryText),
+    );
+}
       ],
     )
 }
