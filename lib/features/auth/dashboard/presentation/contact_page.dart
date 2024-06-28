@@ -54,10 +54,10 @@ class ContactUsPage extends StatelessWidget {
             children: [
               Icon(Icons.email, color: Colors.blue),
               SizedBox(width: 8),
-              Expanded:
-             child: [
+              Expanded(
+                child: Text(
                'contact@easyghar.com'
-    ]
+                style
     )
     )
     ]
