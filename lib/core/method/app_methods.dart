@@ -17,7 +17,11 @@ class AppMethods{
                 topRight: Radius.circular(25.0),
                 ),
             ),
-    };
+            builder: (context) => Padding(
+                  padding: MediaQuery.of(context).viewInsets,
+                child: widget,
+            ),
+        );
 }
 
 static void showLoaderDialog(BuildContext context,
@@ -67,4 +71,38 @@ static void showLoaderDialog(BuildContext context,
     );
   }
 
-  
+  static Future<bool?> showConfirmDialog(
+    BuildContext context, 
+    String title, 
+    String message,
+    String? id,
+    ) async {
+        return await showDialog<bool>(
+            context: context,
+            builder: (context) => AlertDialog(
+                surfaceTintColor: AppColors.white,
+                title: CText(
+                    title,
+                    type: TextType.titleLarge,
+                ),
+            content: SingleChildScrollView(
+                child: CText(message),
+            ),
+            actions: <Widget>[
+                TextButton(
+                    onPressed: () => Navigator.pop(context, false),
+                    child: CText('Cancel'),
+                ),
+                TextButton(
+                    onPressed: () {
+                        print("Property Deleted");
+                        // context.pop();
+                        // Navigator.pop(context, true);
+                    },
+                    child: const CText('Confirm'),
+                    ),
+                ],
+        ),
+       );
+    }
+}
