@@ -40,3 +40,31 @@ static void showLoaderDialog(BuildContext context,
         },
     );
   }
+
+  /// import 'package:fluttertoast/fluttertoast.dart';
+
+  static displayToastFailure({message}) {
+    Fluttertoast.showToast(
+        msg: message,
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 14.0,
+    );
+  }
+
+  static displayToastSuccess({message}){
+    Fluttertoast.showToast(
+        msg: message,
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.green,
+        textColor: Colors.white,
+        fontSize: 16.0,
+    );
+  }
+
+  
