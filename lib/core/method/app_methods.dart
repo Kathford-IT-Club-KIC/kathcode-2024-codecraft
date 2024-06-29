@@ -19,3 +19,24 @@ class AppMethods{
             ),
     };
 }
+
+static void showLoaderDialog(BuildContext context,
+  {String ? txt, bool dismissable = true}) {
+    AlertDialog alert = AlertDialog(
+        content: Row(
+            children: [
+                const CircularProgressIndicator(),
+                Container(
+                    margin: const EdgeInsets.only(left: 8),
+                    child: Text(txt ?? AppStrings.loadingTxt)),
+            ],
+        ),
+    );
+    showDialog(
+        barrierDismissible: dismissable,
+        context: context,
+        builder: (BuildContext context) {
+            return alert;
+        },
+    );
+  }
