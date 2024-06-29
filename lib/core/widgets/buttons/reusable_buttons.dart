@@ -4,6 +4,7 @@
 import 'package:flutter/material.dart';
 
 import '../../constants/app_colors.dart';
+import '../text/custom_text.dart';
 
 class ReusableButton extends StatelessWidget {
     final String text;

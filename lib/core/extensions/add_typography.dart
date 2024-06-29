@@ -1,9 +1,11 @@
 
 
+import 'package:flutter/material.dart';
+
 extension TypographyUtils on BuildContext {
   ThemeData get theme => Theme.of(this);
   TextTheme get textTheme => theme.textTheme;
-  ColorSchme get colors => theme.colorScheme;
+  ColorScheme get colors => theme.colorScheme;
 
   TextStyle? get displayLarge => textTheme.displayLarge?.copyWith(
     color: colors.onSurface,
