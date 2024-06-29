@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../constants/app_colors.dart';
-import '../widgets/text/custom_text.dart';
 
 class CustTextField extends StatelessWidget {
   final String? labelText;

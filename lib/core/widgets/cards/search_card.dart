@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../constants/app_colors.dart';
+
 
 class Data {
   final String? text;
@@ -45,7 +47,7 @@ class SearchCard extends StatelessWidget {
                   ),
                 ),
               ),
-              AppSpacing.horizontalSpaceSmall,
+              SizedBox(width: 8,),
               Icon(
                 Icons.search,
                 color: Colors.grey,

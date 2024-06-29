@@ -1,13 +1,11 @@
 
 
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+
 class SharedPref {
   static String accessToken = 'accessToken';
-  static String refreshToken = 'refreshToken';
   static String hasSeenOnBoarding = 'hasSeenOnBoarding';
-  static String guest = 'guest';
-  static String userID = 'userID';
-  static String baseUrlKey = 'baseUrlKey';
-  static String rememberedUsernameKey = 'rememberedUsername';
+
 
   static const secureStorage = FlutterSecureStorage(
     iOptions: IOSOptions(accessibility: KeychainAccessibility.first_unlock),

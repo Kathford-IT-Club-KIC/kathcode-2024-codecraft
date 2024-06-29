@@ -1,9 +1,13 @@
+import 'package:flutter/material.dart';
+
+import '../../core/constants/app_colors.dart';
+
 class AppThemes {
   static final ThemeData lightTheme = ThemeData(
     useMaterial3: true,
     fontFamily: "Quicksand",
     colorScheme: ColorScheme.fromSeed(
-      sedColor: AppColors.darkBlue,
+      seedColor: AppColors.darkBlue,
       brightness: Brightness.light,
     ),
     tabBarTheme: TabBarTheme(
@@ -16,11 +20,6 @@ class AppThemes {
     buttonTheme: const ButtonThemeData(
       buttonColor: AppColors.lightBlue,
     ),
-    // elevatedButtonTheme:ElevatedButtonThemeData(
-    //   style:ButtonStyle(
-    //     backgroundColor: WidgetStateProperty.all(AppColors.darkBlue),
-    //   ),
-    // ),
 
     textTheme: const TextTheme(
       headlineSmall: TextStyle(

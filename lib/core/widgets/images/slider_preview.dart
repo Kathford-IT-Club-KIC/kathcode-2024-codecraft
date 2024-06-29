@@ -7,7 +7,11 @@
 
 import 'dart:io';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:photo_view/photo_view_gallery.dart';
+
+import '../../constants/app_assets.dart';
 
 class SliderPreview extends StatefulWidget {
   final List<String> images;
@@ -46,7 +50,7 @@ class _SliderPreviewState extends State<SliderPreview> {
         builder: (BuildContext context, int index) {
           return PhotoViewGalleryPageOptions(
             errorBuilder: (context, error, stackTrace) {
-              return Image.asset(AppAssets.error Image);
+              return Image.asset(AppAssets.);
             },
             imageProvider: widget.isNetworkImage
                 ? CachedNetworkImageProvider(
